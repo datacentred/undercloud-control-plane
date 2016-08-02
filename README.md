@@ -1,19 +1,13 @@
-Undercloud Provisioning Framework
+# Undercloud Control Plane 
 
-Requirements:
+## Description 
 
-Ruby
+An HTTP based API for managing the undercloud provisioning interactions. Provides functions for easy interaction via jenkins or curl. 
+Handles the boot / installation control of systems being built for the undercloud
 
-sudo apt-get install libcurl3 libcurl3-gnutls libcurl4-openssl-dev
-
-
-Contents:
-
-Interrogate
-
-Provides tools to enumaerate blade info from the chassis and builds a rundeck compatible
-yaml file that lists all the ilo's available for use in building the undercloud 
+## Requires
 
 
 
+Built using Ruby and Sinatra 
 
