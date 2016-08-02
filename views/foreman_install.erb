@@ -1,0 +1,15 @@
+#!ipxe
+
+# choose cpu architecture
+cpuid --ext 29 && set arch amd64 || set arch i386
+
+set base-dc-url 10.20.254.10:4567/bootstrap/
+set ubuntu-mirror gb.archive.ubuntu.com
+set append-generic console=tty0 console=ttyS0,19200n8 auto=true locale=en_GB.UTF-8 console-setup/ask_detect=false keyboard-configuration/layoutcode=uk
+set append-foreman hostname=foreman domain=stg.datacentred.services netcfg/choose_interface=auto vga=normal net.ifnames=0 biosdevname=0 acpi=on
+
+
+set release trusty
+initrd http://${ubuntu-mirror}/ubuntu/dists/${release}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}/initrd.gz
+chain http://${ubuntu-mirror}/ubuntu/dists/${release}/main/installer-${arch}/current/images/netboot/ubuntu-installer/${arch}/linux url=http://${base-dc-url}/preseed/foreman.cfg ${append-generic} ${append-foreman} 
+

@@ -1,0 +1,13 @@
+#!ipxe
+
+# choose cpu architecture
+cpuid --ext 29 && set arch amd64 || set arch i386
+
+set base-dc-url 10.20.254.10:4567/bootstrap
+set ubuntu-mirror 10.20.254.10:4567/ubuntu/ubuntu-installer/amd64
+set append-generic console=tty0 console=ttyS0,19200n8 auto=true locale=en_GB.UTF-8 console-setup/ask_detect=false keyboard-configuration/layoutcode=uk hostname=kvm-<%= SecureRandom.hex(4) %> domain=stg.datacentred.services netcfg/choose_interface=auto biosdevname=0 net.ifnames=0 acpi=on
+
+
+initrd http://${ubuntu-mirror}/initrd.gz
+chain http://${ubuntu-mirror}/linux url=http://${base-dc-url}/preseed/kvm.cfg ${append-generic}
+
