@@ -6,20 +6,16 @@ require 'sinatra'
 require 'tilt/erb'
 require 'yaml'
 
-config = YAML.parse(File.read('state/store.yaml'))
+CONFIG = YAML.parse(File.read('config/config.yaml'))
+DB = Sequel.sqlite(CONFIG['database_path'])
+logger = Logger.new(CONFIG['log_path')
 
 set :content_type => 'text/plain'
 set :server, %w[passenger unicorn thin]
 set :sessions, true
 
-
-logger = Logger.new('logs/registrations.log')
-
-DB = Sequel.sqlite("./db/undercloud.sqlite")
-
 class UndercloudProvisioner < Sinatra::Base
     states = ['unstarted', 'installing', 'installed', 'booted']
-    foreman_mac = '00:24:81:ad:df:b8'
 
     ## Run this at the start, once
     before do
@@ -112,7 +108,7 @@ class UndercloudProvisioner < Sinatra::Base
             logger.info  "Booting into OS : #{request.ip}"
             @hosts.where(:mac => params[:mac]).update(:state => 3)
             erb :boot
-        elsif params[:mac] == foreman_mac then
+        elsif params[:mac] == CONFIG['foreman_mac'] then
             # bring up foreman
             logger.info  "Booting Foreman Install : #{request.ip}"
             @hosts.insert(:install_started => Time.now, :ip => request.ip, :mac => params[:mac], :state => 1)

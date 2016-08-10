@@ -1,0 +1,3 @@
+log_path: "logs/undercloud_server.log"
+database_path: "db/undercloud.sqlite"
+foreman_mac: '00:24:81:ad:df:b8' 
