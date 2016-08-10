@@ -15,9 +15,7 @@ set :sessions, true
 
 logger = Logger.new('logs/registrations.log')
 
-#DB = Sequel.sqlite("./db/undercloud.sqlite")
-# TODO add to a config yaml
-DB = Sequel.connect('postgres://dcup:ool1xou0ohP2@localhost/dcup')
+DB = Sequel.sqlite("./db/undercloud.sqlite")
 
 class UndercloudProvisioner < Sinatra::Base
     states = ['unstarted', 'installing', 'installed', 'booted']
@@ -35,7 +33,7 @@ class UndercloudProvisioner < Sinatra::Base
             disk_size = ((data[(data.keys.grep(/blockdevice\S+size/).first)])/(1024 * 1024)).to_i
 
             host_to_update = @hosts.where(:mac => data['macaddress'])
-    		host_to_update.update(:install_finished => Time.now,
+    		    host_to_update.update(:install_finished => Time.now,
                              :state => 2,
                              :hostname => data['hostname'],
                              :manufacturer => data['manufacturer'],

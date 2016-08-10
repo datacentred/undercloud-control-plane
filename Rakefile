@@ -1,5 +1,5 @@
 require 'sequel'
-DB = Sequel.connect('postgres://dcup:ool1xou0ohP2@localhost/dcup')
+DB = Sequel.sqlite("./db/undercloud.sqlite")
 
 namespace :db do
     desc "Creates the database"
