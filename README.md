@@ -7,15 +7,19 @@ Handles the boot / installation control of systems being built for the underclou
 
 ## Requires
 
+### OS
+
 Ubuntu 16.04
 
-ruby (tested on 16.04 system ruby)
-sqlite3 (or Postgres) 
-unicorn
-ruby-sinatra
-ruby-sequel
-sqlite3
-ruby-sqlite3
+### Packages
+
+* ruby (tested on 16.04 system ruby)
+* sqlite3 (or Postgres) 
+* unicorn
+* ruby-sinatra
+* ruby-sequel
+* sqlite3
+* ruby-sqlite3
 
 ## Building
 
