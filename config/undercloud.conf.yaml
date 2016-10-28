@@ -1,0 +1,2 @@
+log_path: "/opt/undercloud-control-plane/logs/undercloud_server.log"
+database_path: "/opt/undercloud-control-plane/db/undercloud.sqlite"
