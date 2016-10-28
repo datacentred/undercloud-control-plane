@@ -7,15 +7,22 @@ Handles the boot / installation control of systems being built for the underclou
 
 ## Requires
 
-Ruby & Rubygems
-Sqlite (or Postgres) 
+Ubuntu 16.04
 
-## Installation
+ruby (tested on 16.04 system ruby)
+sqlite3 (or Postgres) 
+unicorn
+ruby-sinatra
+ruby-sequel
+sqlite3
+ruby-sqlite3
 
-Installation should be handled via puppet, but a Gemfile is provided for a simple *bundle install* in the directory
+## Building
 
-### TODO:
+For convenience, a build script `build.sh` is in the root of the repository. This uses FPM and should be called a directory up from the repo root.
 
- * Move more static config into the YAML config structure 
- * Probably should add some tests ;)
+## Installing
+
+Installation is handled via puppet, seek the `dc_staging::api` class 
+
 
