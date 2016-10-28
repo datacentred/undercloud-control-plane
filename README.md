@@ -26,6 +26,6 @@ For convenience, a build script `build.sh` is in the root of the repository. Thi
 
 ## Installing
 
-Installation is handled via puppet, seek the `dc_staging::api` class 
+Installation is handled via puppet, seek the `dc_staging::master::api` class 
 
 
