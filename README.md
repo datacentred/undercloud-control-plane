@@ -14,12 +14,11 @@ Ubuntu 16.04
 ### Packages
 
 * ruby (tested on 16.04 system ruby)
-* sqlite3 (or Postgres) 
-* unicorn
-* ruby-sinatra
 * ruby-sequel
-* sqlite3
+* ruby-sinatra
 * ruby-sqlite3
+* sqlite3
+* unicorn
 
 ## Building
 
