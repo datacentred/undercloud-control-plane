@@ -1,2 +1,4 @@
-log_path: "/opt/undercloud-control-plane/logs/undercloud_server.log"
-database_path: "/opt/undercloud-control-plane/db/undercloud.sqlite"
+#log_path: "/opt/undercloud-control-plane/logs/undercloud_server.log"
+log_path: "logs/undercloud_server.log"
+#database_path: "/opt/undercloud-control-plane/db/undercloud.sqlite"
+database_path: "db/undercloud.sqlite"

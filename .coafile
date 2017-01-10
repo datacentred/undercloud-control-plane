@@ -1,0 +1,4 @@
+[Default]
+files = lib/*.rb
+bears = CPDBear,RuboCopBear,RubySmellBear,RubySyntaxBear
+language = ruby

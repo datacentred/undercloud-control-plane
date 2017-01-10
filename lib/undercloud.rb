@@ -1,20 +1,23 @@
 require 'json'
-require 'logger'
+require 'LOGGER'
 require 'securerandom'
 require 'sequel'
 require 'sinatra'
 require 'tilt/erb'
 require 'yaml'
 
-CONFIG = YAML::load_file('/etc/undercloud-control-plane/undercloud.conf.yaml')
+#CONFIG = YAML.load_file('/etc/undercloud-control-plane/undercloud.conf.yaml') 
+CONFIG = YAML.load_file('./config/undercloud.conf.yaml')
 DB = Sequel.sqlite(CONFIG['database_path'])
-logger = Logger.new(CONFIG['log_path'])
+LOGGER = Logger.new(CONFIG['log_path'])
 
-set :content_type => 'text/plain'
-set :server, %w[passenger unicorn thin]
+set :content_type, 'text/plain'
+set :server, %w(passenger unicorn thin)
 set :sessions, true
 
 class UndercloudProvisioner < Sinatra::Base
+  attr_reader :hosts
+
   states = ['unstarted', 'installing', 'installed', 'booted']
 
   ## Run this at the start, once
@@ -106,12 +109,12 @@ class UndercloudProvisioner < Sinatra::Base
   get '/boot' do
     # hard drive boot 
     if lookup_mac(params[:mac]) then
-      logger.info  "Booting into OS : #{request.ip}"
+      LOGGER.info  "Booting into OS : #{request.ip}"
       @hosts.where(:mac => params[:mac]).update(:state => 3)
       erb :boot
     else
       # install ubuntu    
-      logger.info  "Installing OS : #{request.ip}"
+      LOGGER.info  "Installing OS : #{request.ip}"
       @hosts.insert(:install_started => Time.now, :ip => request.ip, :mac => params[:mac], :state => 1)
       erb :os_install
     end
